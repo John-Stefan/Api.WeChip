@@ -26,15 +26,15 @@ namespace Api.WeChip.Controllers
         }
 
         [HttpGet]
-        [Route("produtos/{id}")]
+        [Route("produtos/{codigoOrDescricao}")]
         public async Task<IActionResult> GetByIdAsync(
             [FromServices] AppDbContext context,
-            [FromRoute] int id)
+            [FromRoute] string codigoOrDescricao)
         {
             var produto = await context
                 .Produtos
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Codigo.ToUpper() == codigoOrDescricao.ToUpper() || c.Descricao.ToUpper() == codigoOrDescricao.ToUpper());
 
             return produto == null
                 ? NotFound()
