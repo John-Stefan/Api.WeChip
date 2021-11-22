@@ -68,6 +68,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "NHibernate": {
+              "target": "Package",
+              "version": "[5.3.10, )"
+            },
             "Unity": {
               "target": "Package",
               "version": "[5.11.10, )"

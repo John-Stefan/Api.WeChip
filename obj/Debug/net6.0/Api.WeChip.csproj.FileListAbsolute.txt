@@ -56,3 +56,11 @@ C:\dev\Api.WeChip\obj\Debug\net6.0\ref\Api.WeChip.dll
 C:\dev\Api.WeChip\obj\Debug\net6.0\Api.WeChip.pdb
 C:\dev\Api.WeChip\obj\Debug\net6.0\Api.WeChip.genruntimeconfig.cache
 C:\dev\Api.WeChip\obj\Debug\net6.0\Api.WeChip.csproj.AssemblyReference.cache
+C:\dev\Api.WeChip\bin\Debug\net6.0\Antlr3.Runtime.dll
+C:\dev\Api.WeChip\bin\Debug\net6.0\Iesi.Collections.dll
+C:\dev\Api.WeChip\bin\Debug\net6.0\NHibernate.dll
+C:\dev\Api.WeChip\bin\Debug\net6.0\Remotion.Linq.dll
+C:\dev\Api.WeChip\bin\Debug\net6.0\Remotion.Linq.EagerFetching.dll
+C:\dev\Api.WeChip\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\dev\Api.WeChip\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\dev\Api.WeChip\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll

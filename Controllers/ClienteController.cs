@@ -13,7 +13,7 @@ namespace Api.WeChip.Controllers
     [Route("v1")]
     public class ClienteController : ControllerBase
     {
-        [HttpGet]        
+        [HttpGet]
         [Route("clientes")]
         public async Task<IActionResult> GetAsync(
             [FromServices] AppDbContext context)
@@ -27,7 +27,37 @@ namespace Api.WeChip.Controllers
         }
 
         [HttpGet]
-        [Route("clientes/{nameorcpf}")]
+        [Route("clientes/{id}")]
+        public async Task<IActionResult> GetByIdAsync(
+            [FromServices] AppDbContext context,
+            [FromRoute] int id)
+        {
+            var clientes = await context
+                .Clientes
+                .Where(c => c.Id == id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
+            return Ok(clientes);
+        }
+
+        [HttpGet]
+        [Route("clientes/grid/{busca}")]
+        public async Task<IActionResult> GetCLientesByNameOrCPFAsync(
+            [FromServices] AppDbContext context,
+            [FromRoute] string busca)
+        {
+            var clientes = await context
+                .Clientes
+                .Where(c => c.Nome.ToUpper().Contains(busca.ToUpper()) || c.CPF == busca)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return Ok(clientes);
+        }
+
+        [HttpGet]
+        [Route("clientes/busca/{nameorcpf}")]
         public async Task<IActionResult> GetByNameOrCpfAsync(
             [FromServices] AppDbContext context,
             [FromRoute] string nameorcpf)
@@ -50,7 +80,7 @@ namespace Api.WeChip.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var status = context.Status.FirstOrDefault(c => c.Id == model.StatusId);
+            var status = context.Status.FirstOrDefault(c => c.Codigo == model.StatusId);
             if (status == null)
                 return BadRequest();
 
@@ -81,21 +111,27 @@ namespace Api.WeChip.Controllers
             [FromBody] UpdateClienteViewModel model,
             [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
-            var cliente = await context
-                .Clientes
-                .FirstOrDefaultAsync(c => c.Id == id);
-
-            if (cliente == null)
-                NotFound();
-
             try
             {
+                if (!ModelState.IsValid)
+                    return BadRequest();
+
+                var cliente = await context
+                    .Clientes
+                    .FirstOrDefaultAsync(c => c.Id == id);
+
+                if (cliente == null)
+                    NotFound();
+
+                var status = context.Status.FirstOrDefault(c => c.Codigo == model.StatusId);
+                if (status == null)
+                    return BadRequest();
+
                 cliente.Nome = model.Nome;
                 cliente.CPF = model.CPF;
                 cliente.Telefone = model.Telefone;
+                cliente.Credito = model.Credito;
+                cliente.Status = status;
 
                 context.Clientes.Update(cliente);
                 await context.SaveChangesAsync();

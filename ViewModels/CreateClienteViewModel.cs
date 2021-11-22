@@ -12,6 +12,6 @@ namespace Api.WeChip.ViewModels
         [Required]
         public string Telefone { get; set; }
         public decimal Credito { get; set; }
-        public int StatusId { get; set; }
+        public string StatusId { get; set; }
     }
 }
