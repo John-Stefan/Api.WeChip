@@ -13,5 +13,6 @@ namespace Api.WeChip.Models
 
         [JsonIgnore]
         public Status Status { get; set; }
+        public List<Oferta> Ofertas { get; set; }
     }
 }

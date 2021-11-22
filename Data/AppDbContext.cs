@@ -36,6 +36,22 @@ namespace Api.WeChip.Data
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Clientes_Status_StatusId");
             });
+
+            modelBuilder.Entity<OfertaProduto>(entity =>
+            {
+                entity.HasOne(p => p.Produto).WithMany(pt => pt.OfertaProdutos)
+                .HasForeignKey(pt => pt.ProdutoId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_OfertaProdutos_Produtos_ProdutoId");
+            });
+
+            modelBuilder.Entity<Oferta>(entity =>
+            {
+                entity.HasOne(p => p.Cliente).WithMany(pt => pt.Ofertas)
+                .HasForeignKey(pt => pt.ClienteId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Clientes_Ofertas_ClienteId");
+            });
         }
     }
 }

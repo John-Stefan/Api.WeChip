@@ -13,5 +13,6 @@ namespace Api.WeChip.Models
 
         [JsonIgnore]
         public ProdutoTipo Tipo { get; set; }
+        public List<OfertaProduto> OfertaProdutos { get; set; }
     }
 }
